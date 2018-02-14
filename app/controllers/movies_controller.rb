@@ -18,6 +18,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    @all_ratings = Movie.all_ratings.sort
   end
 
   def new
