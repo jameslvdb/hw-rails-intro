@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @current_ratings = params[:ratings].keys
     if params[:sort_column].present?
       @movies = Movie.all.order(params[:sort_column])
       # instance variable for setting class to hilite
