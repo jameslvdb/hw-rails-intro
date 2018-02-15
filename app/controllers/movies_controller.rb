@@ -25,6 +25,11 @@ class MoviesController < ApplicationController
       @movies = Movie.where(rating: @current_ratings).order(params[:sort_column])
       # instance variable for setting class to hilite
       @sort_column = params[:sort_column]
+      session[:sort_column] = @sort_column
+    elsif
+      @movies = Movie.where(rating: @current_ratings).order(session[:sort_column])
+      flash.keep
+      @sort_column = session[:sort_column]
     else
       @movies = Movie.where(rating: @current_ratings)
     end
