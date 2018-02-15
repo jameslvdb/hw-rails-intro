@@ -11,9 +11,12 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @all_ratings = Movie.all_ratings.sort 
+    @all_ratings = Movie.all_ratings.sort
     if params[:ratings].present?
       @current_ratings = params[:ratings].keys
+      session[:ratings] = @current_ratings
+    elsif session[:ratings].present?
+      @current_ratings = session[:ratings]
     else
       @current_ratings = Movie.all_ratings
     end
