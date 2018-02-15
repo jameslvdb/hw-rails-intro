@@ -11,8 +11,8 @@ class MoviesController < ApplicationController
   end
 
   def index
-    if params[:rating].present?
-      @current_1 = params[:rating].keys
+    if params[:ratings].present?
+      @current_ratings = params[:ratings].keys
     else
       @current_ratings = Movie.all_ratings
     end
