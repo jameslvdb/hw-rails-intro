@@ -29,7 +29,6 @@ class MoviesController < ApplicationController
 
     # :sort_column
     if params[:sort_column].present?
-      # instance variable for setting class to hilite
       @sort_column = params[:sort_column]
       session[:sort_column] = params[:sort_column]
       @movies = @movies.order(@sort_column)
