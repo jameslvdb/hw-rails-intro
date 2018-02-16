@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    update = false   # flag for a redirect_to 
+    update = false   # flag for a redirect_to
     @all_ratings = Movie.all_ratings.sort
 
     # :ratings
@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
       session[:ratings] = params[:current_ratings]
     elsif session[:ratings].present?
       @current_ratings = session[:ratings]
-      params[:ratings] = session[:ratings]
+      params[:ratings] = @current_ratings
       update = true
     else
       @current_ratings = Movie.all_ratings
@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
       # instance variable for setting class to hilite
       @sort_column = params[:sort_column]
       session[:sort_column] = params[:sort_column]
-    elsif
+    elsif session[:sort_column].present?
       @movies = Movie.where(rating: @current_ratings).order(session[:sort_column])
       @sort_column = session[:sort_column]
       params[:sort_column] = session[:sort_column]
@@ -40,7 +40,6 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.where(rating: @current_ratings)
     end
-
     if update
       flash.keep
       redirect_to movies_path(params)
